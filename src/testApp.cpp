@@ -13,16 +13,17 @@ void testApp::setup(){
 	//animationTime = 0.0f;
 
 	noiseTexture.loadImage("textures/noiseTexture.jpg");
+	furTexture.loadImage("textures/furTexture.jpg");
 	furShader.load("Shaders/FurShader.vert", "Shaders/FurShader.frag");
 
-	w = 100; h = 50;
+	w = 100; h = 100;
 	finalFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
 	finalFBO.begin();
 	ofClear(0, 0, 0, 255);
 	finalFBO.end();
 
-	furTotalLength = 10;
-	furNumberOfLayers = 5;
+	furTotalLength = 20;
+	furNumberOfLayers = 100;
 }
 
 //--------------------------------------------------------------
@@ -46,6 +47,7 @@ void testApp::draw(){
 
 		furShader.begin();
 		furShader.setUniformTexture("noiseTexture", noiseTexture.getTextureReference(), 1);
+		furShader.setUniformTexture("furTexture", furTexture.getTextureReference(), 2);
 		furShader.setUniform1f("furLayerLength", furLayerLength);
 		furShader.setUniform1f("furLayerFraction", furLayerFraction);
 
