@@ -24,7 +24,7 @@ class testApp : public ofBaseApp{
 		ofLight light;
 		ofEasyCam cam;
 		ofShader furShader;
-		ofImage noiseTexture, furTexture;
+		ofImage furLengthNoiseTexture, furVisibilityNoiseTexture, furTexture;
 		ofFbo finalFBO;
 		float animationTime;
 		int w, h;
