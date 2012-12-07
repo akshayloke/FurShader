@@ -1,18 +1,17 @@
 #version 120
 #extension GL_ARB_texture_rectangle: enable
 
-uniform float furLayerLength, furLayerFraction;
-varying float varying_furLayerFraction;
+uniform float furLength, furCurrentLayer;
+varying float currentLayer;
+uniform vec3 displacement;
 
 void main() {
+	vec3 p = gl_Vertex.xyz + (gl_Normal * furLength * furCurrentLayer);
 	
-	vec3 p = gl_Vertex.xyz + (gl_Normal * furLayerLength);
-	
-	float k = pow(furLayerFraction, 2);
-	vec3 gravity = vec3(0, -1, 0);
-	p += gravity * k;
+	float k = pow(furCurrentLayer, 3);
+	p += displacement * k;
 
 	gl_Position = gl_ModelViewProjectionMatrix * vec4(p, 1.0);
 	gl_TexCoord[0] = gl_MultiTexCoord0;
-	varying_furLayerFraction = furLayerFraction;
+	currentLayer = furCurrentLayer;
 }
